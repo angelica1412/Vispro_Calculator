@@ -28,10 +28,11 @@ func (c *Calculator) Multiply(a, b float64) float64 {
 
 // Divide performs division between two numbers.
 func (c *Calculator) Divide(a, b float64) (float64, error) {
-	if b == 0 {
-		return 0, errors.New("cannot divide by zero")
+	result, err := mathops.Division(a, b)
+	if err != nil {
+		return 0, err
 	}
-	return mathops.Division(a, b)
+	return result, nil
 }
 
 // Power calculates the power of a number to the specified exponent.

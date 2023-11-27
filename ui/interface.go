@@ -24,6 +24,15 @@ func NewUserInterface(calc *calculator.Calculator) *UserInterface {
 }
 
 // getUserInput prompts the user for input and returns the entered value.
+// interface.go
+
+// ...
+
+// interface.go
+
+// ...
+
+// getUserInput prompts the user for input and returns the entered value.
 func (ui *UserInterface) getUserInput(message string) (float64, error) {
 	fmt.Print(message + ": ")
 	scanner := bufio.NewScanner(os.Stdin)
@@ -34,21 +43,23 @@ func (ui *UserInterface) getUserInput(message string) (float64, error) {
 		return 0, errors.New("input is empty")
 	}
 
-	// Validasi apakah input hanya mengandung angka
-	// Izinkan tanda minus hanya jika itu adalah karakter pertama
-	isNegative := false
+	// Validasi apakah input hanya mengandung angka atau angka desimal
+	dotCount := 0
 	for i, char := range input {
 		if i == 0 && char == '-' {
-			isNegative = true
+			continue
+		}
+		if char == '.' {
+			// Hanya izinkan satu titik desimal
+			if dotCount > 0 {
+				return 0, errors.New("invalid input: must be a number")
+			}
+			dotCount++
 			continue
 		}
 		if !unicode.IsDigit(char) {
 			return 0, errors.New("invalid input: must be a number")
 		}
-	}
-
-	if isNegative {
-		input = "-" + input[1:] // Tambahkan tanda minus kembali ke input
 	}
 
 	value, err := strconv.ParseFloat(input, 64)
