@@ -1,5 +1,3 @@
-// operations.go
-
 package mathops
 
 import (
@@ -7,58 +5,56 @@ import (
 	"math"
 )
 
-// Addition returns the sum of two numbers.
+// Function untuk mengembalikan hasil penjumlahan
 func Addition(a, b float64) float64 {
 	return a + b
 }
 
-// Subtraction returns the difference between two numbers.
+// Function untuk mengembalikan hasil pengurangan
 func Subtraction(a, b float64) float64 {
 	return a - b
 }
 
-// Multiplication returns the product of two numbers.
+// Function untuk mengembalikan hasil perkalian
 func Multiplication(a, b float64) float64 {
 	return a * b
 }
 
-// Division returns the result of dividing a by b.
-// It returns an error if b is 0.
+// Function untuk mengembalikan hasil pembagian
 func Division(a, b float64) (float64, error) {
 	if b == 0 {
-		return 0, errors.New("division by zero is undefined")
+		return 0, errors.New("division by zero is undefined") // pesan eror yang akan muncul jika b (penyebutnya) adalah 0
 	}
 	return a / b, nil
 }
 
-// Power returns the result of base raised to the power of exponent.
-// It returns an error if the base is 0 and the exponent is negative.
+// Function untuk mengembalikan hasil pemangkatan
 func Power(base, exponent float64) (float64, error) {
 	if base == 0 && exponent < 0 {
-		return 0, errors.New("undefined for 0 base with negative exponent")
+		return 0, errors.New("undefined for 0 base with negative exponent") // pesan eror yang keluar jika basisnya adalah 0 dan pangkatnya berupa minus
 	}
 	return math.Pow(base, exponent), nil
 }
 
-// SquareRoot returns the square root of a number.
+// Function untuk mengembalikan hasil akar kuadrat
 func SquareRoot(a float64) (float64, error) {
 	if a < 0 {
-		return 0, errors.New("square root of a negative number is undefined")
+		return 0, errors.New("square root of a negative number is undefined") // pesan eror yang akan muncul ketika angka di dalam akar berupa nilai negatif
 	}
 	return math.Sqrt(a), nil
 }
 
-// Sin returns the sine of the given angle in radians.
+// Function untuk mengembalikan nilai sin dari sudut yang diberikan dalam bentuk radian
 func Sin(angle float64) float64 {
 	return math.Sin(angle)
 }
 
-// Cos returns the cosine of the given angle in radians.
+// Function untuk mengembalikan nilai cos dari sudut yang diberikan dalam bentuk radian
 func Cos(angle float64) float64 {
 	return math.Cos(angle)
 }
 
-// Tan returns the tangent of the given angle in radians.
+// Function untuk mengembalikan nilai tan dari sudut yang diberikan dalam bentuk radian
 func Tan(angle float64) float64 {
 	return math.Tan(angle)
 }

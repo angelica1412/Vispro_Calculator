@@ -2,45 +2,47 @@
 
 package calculator
 
+// Mengimport function yang ada pada mathops ke dalam package calculator
 import (
 	"Calculator_GoLang/mathops"
 	"errors"
 	"math"
 )
 
-// Calculator struct represents a simple calculator.
 type Calculator struct{}
 
-// Add performs addition of two numbers.
+// Function yang digunakan apabila terdapat 2 angka yang ingin dijumlahkan
 func (c *Calculator) Add(a, b float64) float64 {
 	return mathops.Addition(a, b)
 }
 
-// Subtract performs subtraction between two numbers.
+// Function yang digunakan apabila terdapat 2 angka yang ingin dikurangkan
 func (c *Calculator) Subtract(a, b float64) float64 {
 	return mathops.Subtraction(a, b)
 }
 
-// Multiply performs multiplication between two numbers.
+// Function yang digunakan apabila terdapat 2 angka yang ingin dikalikan
 func (c *Calculator) Multiply(a, b float64) float64 {
 	return mathops.Multiplication(a, b)
 }
 
-// Divide performs division between two numbers.
+// Function yang digunakan apabila terdapat 2 angka yang ingin dibagi
 func (c *Calculator) Divide(a, b float64) (float64, error) {
 	result, err := mathops.Division(a, b)
+
+	// jika penyebutnya adalah 0, akan menampilkan eror
 	if err != nil {
 		return 0, err
 	}
 	return result, nil
 }
 
-// Power calculates the power of a number to the specified exponent.
+// Function yang digunakan untuk menghitung hasil pemangkatan suatu bilangan dengan eksponen tertentu.
 func (c *Calculator) Power(base, exponent float64) (float64, error) {
 	return mathops.Power(base, exponent)
 }
 
-// SquareRoot calculates the square root of a number.
+// Function untuk menghitung akar kuadrat dari suatu angka.
 func (c *Calculator) SquareRoot(a float64) (float64, error) {
 	if a < 0 {
 		return 0, errors.New("square root of a negative number is undefined")
@@ -48,28 +50,30 @@ func (c *Calculator) SquareRoot(a float64) (float64, error) {
 	return mathops.SquareRoot(a)
 }
 
+// Function untuk menghitung sinus dari suatu sudut (dalam derajat).
 func (c *Calculator) Sin(angle float64) float64 {
 	// Konversi derajat ke radian
 	angleInRadians := angle * math.Pi / 180.0
 	return math.Sin(angleInRadians)
 }
 
-// Cos calculates the cosine of an angle (in degrees).
+// Function untuk menghitung cosinus dari suatu sudut (dalam derajat).
 func (c *Calculator) Cos(angle float64) float64 {
 	// Konversi derajat ke radian
 	angleInRadians := angle * math.Pi / 180.0
 	return math.Cos(angleInRadians)
 }
 
-// Tan calculates the tangent of an angle (in degrees).
+// Function untuk menghitung tangen dari suatu sudut (dalam derajat).
 func (c *Calculator) Tan(angle float64) (float64, error) {
-	// Konversi derajat ke radian
+	// Convert degrees to radians
 	angleInRadians := angle * math.Pi / 180.0
 
-	// Tangen dari sudut theta adalah sin(theta) / cos(theta)
 	cosValue := math.Cos(angleInRadians)
-	if cosValue == 0 {
-		return 0, errors.New("tangent is undefined for cos(θ) = 0")
+
+	// eror yang akan dijalankan jika hasil dari cos sudut yang diinput oleh user bernilai 0
+	if math.Abs(cosValue) < 1e-10 { // 1e-10 merupakan nilai epsilon yang merupakan bilangan yang relatif kecil
+		return math.Inf(1), errors.New("tangent is undefined for cos(θ) ≈ 0")
 	}
 
 	return math.Sin(angleInRadians) / cosValue, nil

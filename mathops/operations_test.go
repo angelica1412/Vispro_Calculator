@@ -1,4 +1,4 @@
-// operations_test.go
+// Untuk mengetes apakah function yang ada pada operations_go sudah berjalan dengan baik
 
 package mathops
 

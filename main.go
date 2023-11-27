@@ -9,9 +9,9 @@ import (
 
 func main() {
 	// Inisialisasi kalkulator dan antarmuka pengguna
-	calc := calculator.Calculator{}
-	ui := ui.NewUserInterface(&calc)
+	calc := calculator.Calculator{}  // Membuat instance dari kalkulator
+	ui := ui.NewUserInterface(&calc) // Membuat instance dari antarmuka pengguna dengan mengirimkan referensi kalkulator
 
 	// Menjalankan kalkulator
-	ui.RunCalculator()
+	ui.RunCalculator() // Memulai antarmuka pengguna untuk menjalankan kalkulator
 }

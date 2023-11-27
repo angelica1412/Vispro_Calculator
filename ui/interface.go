@@ -13,32 +13,24 @@ import (
 	"unicode"
 )
 
-// UserInterface struct represents the user interface for the calculator.
+// UserInterface adalah struktur yang mewakili antarmuka pengguna untuk kalkulator.
 type UserInterface struct {
 	calculator *calculator.Calculator
 }
 
-// NewUserInterface creates a new UserInterface instance.
+// Function untuk membuat instance user interface baru
 func NewUserInterface(calc *calculator.Calculator) *UserInterface {
 	return &UserInterface{calculator: calc}
 }
 
-// getUserInput prompts the user for input and returns the entered value.
-// interface.go
-
-// ...
-
-// interface.go
-
-// ...
-
-// getUserInput prompts the user for input and returns the entered value.
+// Function yang dijalankan untuk meminta pengguna untuk input dan mengembalikan nilai yang dimasukkan.
 func (ui *UserInterface) getUserInput(message string) (float64, error) {
 	fmt.Print(message + ": ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input := strings.TrimSpace(scanner.Text())
 
+	// Jika inoutan user berupa spasiS
 	if input == "" {
 		return 0, errors.New("input is empty")
 	}
@@ -49,6 +41,8 @@ func (ui *UserInterface) getUserInput(message string) (float64, error) {
 		if i == 0 && char == '-' {
 			continue
 		}
+
+		// Jika inputan user berupa huruf
 		if char == '.' {
 			// Hanya izinkan satu titik desimal
 			if dotCount > 0 {
@@ -79,7 +73,7 @@ func (ui *UserInterface) displayResult(result float64, err error) {
 	}
 }
 
-// RunCalculator prompts the user for input and performs calculator operations.
+// Function untuk meminta pengguna untuk input dan melakukan operasi kalkulator.
 func (ui *UserInterface) RunCalculator() {
 	for {
 		fmt.Println(" ")
@@ -103,6 +97,8 @@ func (ui *UserInterface) RunCalculator() {
 		fmt.Println(" ")
 
 		switch choice {
+
+		// Akan jalan sesuai dengan inputan user
 		case 1:
 			a, err := ui.getUserInput("Enter the first number")
 			if err != nil {
@@ -193,6 +189,7 @@ func (ui *UserInterface) RunCalculator() {
 				continue
 			}
 
+			// Bagian yang akan dijalankan berdasarkan inputan (pilihan) dari user
 			switch trigChoice {
 			case 1:
 				result := ui.calculator.Sin(angle)
