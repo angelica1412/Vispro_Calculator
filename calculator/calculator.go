@@ -54,14 +54,14 @@ func (c *Calculator) SquareRoot(a float64) (float64, error) {
 func (c *Calculator) Sin(angle float64) float64 {
 	// Konversi derajat ke radian
 	angleInRadians := angle * math.Pi / 180.0
-	return math.Sin(angleInRadians)
+	return mathops.Sin(angleInRadians)
 }
 
 // Function untuk menghitung cosinus dari suatu sudut (dalam derajat).
 func (c *Calculator) Cos(angle float64) float64 {
 	// Konversi derajat ke radian
 	angleInRadians := angle * math.Pi / 180.0
-	return math.Cos(angleInRadians)
+	return mathops.Cos(angleInRadians)
 }
 
 // Function untuk menghitung tangen dari suatu sudut (dalam derajat).
@@ -69,12 +69,12 @@ func (c *Calculator) Tan(angle float64) (float64, error) {
 	// Convert degrees to radians
 	angleInRadians := angle * math.Pi / 180.0
 
-	cosValue := math.Cos(angleInRadians)
+	cosValue := mathops.Cos(angleInRadians)
 
 	// eror yang akan dijalankan jika hasil dari cos sudut yang diinput oleh user bernilai 0
 	if math.Abs(cosValue) < 1e-10 { // 1e-10 merupakan nilai epsilon yang merupakan bilangan yang relatif kecil
 		return math.Inf(1), errors.New("tangent is undefined for cos(θ) ≈ 0")
 	}
 
-	return math.Sin(angleInRadians) / cosValue, nil
+	return mathops.Sin(angleInRadians) / cosValue, nil
 }
